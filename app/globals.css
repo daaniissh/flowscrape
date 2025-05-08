@@ -1,9 +1,9 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
- 
+@import "tailwindcss";
+@import "tw-animate-css";
+
 /* https://stackoverflow.com/questions/79416157/how-to-enable-tailwind-css-v4-0-for-the-packages-ui-components-in-turborepo */
 @source "./";
- 
+
 @custom-variant dark (&:is(.dark *));
 :root {
   --radius: 0.5rem;
@@ -74,7 +74,6 @@
   --sidebar-ring: oklch(0.527 0.154 150.069);
 }
 
- 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -113,19 +112,22 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
- 
+
+@utility flex-center {
+  @apply flex justify-center items-center;
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
- 
+
   body {
     @apply bg-background text-foreground;
   }
- 
+
   button:not([disabled]),
-  [role='button']:not([disabled]) {
+  [role="button"]:not([disabled]) {
     cursor: pointer;
   }
 }
- 
+
