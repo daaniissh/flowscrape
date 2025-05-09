@@ -6,28 +6,26 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 export function ClerkProviderWrapper({ children }: { children: React.ReactNode }) {
-  const { resolvedTheme } = useTheme(); // 'light' or 'dark'
+  const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true); // Prevent hydration mismatch
+    setMounted(true);
   }, []);
 
   if (!mounted) return null;
+
+  // Determine the effective theme (respect system preference)
+  const effectiveTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <ClerkProvider
       afterSignOutUrl="/sign-in"
       appearance={{
-        baseTheme: resolvedTheme === "dark" ? dark : undefined,
-       
+        baseTheme: effectiveTheme === "dark" ? dark : undefined,
       }}
     >
-      <html lang="en">
-        <body className="font-sans">
-          {children}
-        </body>
-      </html>
+      {children}
     </ClerkProvider>
   );
 }
