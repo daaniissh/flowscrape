@@ -29,15 +29,17 @@ export default function RootLayout({
 
   return (
 
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
      
       <body className={`${geistSans.variable} ${geistMono.variable}`}> 
         <AppProvider>
           {children}
         </AppProvider>
+          <Toaster richColors/>
       </body>
 
-      <Toaster richColors/>
+  
     </html>
   );
 }
+  
