@@ -20,6 +20,8 @@
 # production
 /build
 
+
+# lib/generated/*
 lib/generated/prisma/
 prisma/dev.db
 
