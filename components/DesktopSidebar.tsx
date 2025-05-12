@@ -53,10 +53,10 @@ export function MobileSidebar() {
   const pathname = usePathname()
   const activeRoute = routes.find(route => route.href.length > 0 && pathname.includes(route.href)) || routes[0]
   return <div className='block border-separate bg-background md:hidden' >
-    <nav className="container flex-center px-8 ">
+    <nav className="container flex-center">
       <Sheet open={isOpen} onOpenChange={setOpen}>
         <SheetTrigger>
-          <Button onClick={() => setOpen(prev => !prev)} variant="ghost" size={"icon"}>
+          <Button  onClick={() => setOpen(prev => !prev)} variant="ghost" size={"icon"}>
             <MenuIcon />
           </Button>
         </SheetTrigger>

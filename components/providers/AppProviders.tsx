@@ -2,9 +2,17 @@
 
 import { ThemeProvider } from "next-themes"
 import { ClerkProviderWrapper } from "../ClerkThemeProvider"
-
+import { useState } from "react"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools"
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  return <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-    <ClerkProviderWrapper>{children}</ClerkProviderWrapper>
-  </ThemeProvider>
+  const [queryClient] = useState(() => new QueryClient)
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ClerkProviderWrapper>{children}</ClerkProviderWrapper>
+      </ThemeProvider>
+      <ReactQueryDevtools/>
+    </QueryClientProvider>
+  )
 }
