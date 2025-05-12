@@ -29,7 +29,27 @@ function UserWorkFlowsSkelton() {
   return <div className="space-y-2">
     {
       Array.from({ length: 5 }).map((_, index) => (
-        <Skeleton key={index} className='h-32 w-full' />
+        <Skeleton key={index} className="border  items-center w-full border-muted rounded-lg overflow-hidden h-[72px] bg-muted/20">
+          <div className="flex items-center justify-between py-4 px-3">
+            <div className="flex justify-center items-center space-x-3">
+              {/* Status circle skeleton - different color */}
+              <Skeleton className="w-10 h-10 rounded-full bg-primary/10" />
+
+              {/* Text content skeleton */}
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[160px] bg-muted-foreground/10" />
+                {/* Draft badge skeleton - accent color */}
+                <Skeleton className="h-3 w-[40px] rounded-full bg-yellow-500/10" />
+              </div>
+            </div>
+
+            {/* Action buttons skeleton - different intensities */}
+            <div className="flex items-center space-x-2">
+              <Skeleton className="h-8 w-[80px] rounded-md bg-muted-foreground/5" />
+              <Skeleton className="h-8 w-8 rounded-md bg-muted-foreground/10" />
+            </div>
+          </div>
+        </Skeleton>
       ))
 
     }
@@ -62,8 +82,8 @@ async function UserWorkFlows() {
     </div>)
   }
   return <div className='grid grid-cols-1 gap-4'>
-    {workFlows.map((workflow,index)=>(
-      <WorkflowCard key={index} workflow={workflow}/>
+    {workFlows.map((workflow, index) => (
+      <WorkflowCard key={index} workflow={workflow} />
     ))}
   </div>
 }
