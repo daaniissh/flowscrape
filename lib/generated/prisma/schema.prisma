@@ -7,8 +7,14 @@ generator client {
 }
 
 datasource db {
+<<<<<<< HEAD
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+=======
   provider = "sqlite"
   url      = "file:./dev.db"
+>>>>>>> f1499ccc6787e61d46932cc4f1f08cf91d913429
 }
 
 model WorkFlow {
