@@ -20,6 +20,9 @@
 # production
 /build
 
+lib/generated/prisma/
+prisma/dev.db
+
 # misc
 .DS_Store
 *.pem
