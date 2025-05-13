@@ -10,7 +10,7 @@ interface Props {
  subtitle? : string;
  workflowId: string;
 }
-export default function Topbar({title,subtitle}:Props) {
+export default function Topbar({title,subtitle,workflowId}:Props) {
   const router = useRouter();
   return (
     <header className="flex p-2 border-p-2 border-separate justify-between w-full h-[60px] sticky top-0 bg-background z-10">

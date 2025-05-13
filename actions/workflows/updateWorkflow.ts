@@ -16,16 +16,16 @@ export async function UpdateWorkflow({
   if (!userId) {
     throw new Error("unauthorized");
   }
-  const workFlow = await prisma.workFlow.findUnique({
+  const workflow = await prisma.workFlow.findUnique({  
     where: {
       id,
       userId,
     },
   });
-  if (!workFlow) {
+  if (!workflow) {
     throw new Error("workflow not found");
   }
-  if (workFlow.status !== WorkFlowStatus.DRAFT)
+  if (workflow.status !== WorkFlowStatus.DRAFT)
     throw new Error("workflow is not in draft status, cannot update");
 
   await prisma.workFlow.update({
