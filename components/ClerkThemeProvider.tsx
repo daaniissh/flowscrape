@@ -17,10 +17,10 @@ export function ClerkProviderWrapper({ children }: { children: React.ReactNode }
 
   // Determine the effective theme (respect system preference)
   const effectiveTheme = theme === "system" ? systemTheme : theme;
-
   return (
     <ClerkProvider
-      afterSignOutUrl="/sign-in"
+    
+      afterSignOutUrl="/sign-n"
       appearance={{
         baseTheme: effectiveTheme === "dark" ? dark : undefined,
       }}

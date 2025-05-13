@@ -1,13 +1,11 @@
-// app/workflow/editor/[workflowId]/page.tsx
-
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
 import Editor from '../../_components/Editor';
 import React from 'react';
 
-const Page = async (props: { params: { workflowId: string } }) => {
-  const { params } = props; // <-- Don't destructure before
-  const { workflowId } = params;
+const Page = async ({ params }: { params: { workflowId: string } }) => {
+  // Await the params object first
+  const { workflowId } = await params; // <-- Add await here
   const { userId } = await auth();
 
   if (!userId) return <div>unauthenticated</div>;
