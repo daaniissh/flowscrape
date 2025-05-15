@@ -12,7 +12,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <ClerkProviderWrapper>{children}</ClerkProviderWrapper>
       </ThemeProvider>
-      <ReactQueryDevtools/>
+      {/* <ReactQueryDevtools/> */}
     </QueryClientProvider>
   )
 }

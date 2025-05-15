@@ -7,14 +7,17 @@ export const LaunchBrowserTask = {
   icon: (props: LucideProps) => (
     <GlobeIcon className="stroke-pink-400 size-8" {...props} />
   ),
-  isEntryPoint: true,
+  isEntryPoint: false,
   inputs: [
     {
       name: "website url",
-      type:TaskParamType.STRING,
+      type: TaskParamType.STRING,
       helperText: "eg: https://www.google.com",
       required: true,
-      hideHandle:true
+      hideHandle: true
     }
+  ],
+  outputs: [
+    { name: "Web page", type: TaskParamType.BROWSER_INSTANCE }
   ]
 };
