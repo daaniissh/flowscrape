@@ -11,7 +11,7 @@ function layout({ children }: { children: React.ReactNode }) {
 
        <DesktopSidebar/>
      
-      <div className="flex flex-col flex-1 min-h-screen">
+      <div className="flex   flex-col flex-1 min-h-screen">
         <header className='flex items-center justify-between px-6 py-4 h-[55px] container' >
           <BreadcrumbHeader/>
           <div className="gap-4 flex items-center">
