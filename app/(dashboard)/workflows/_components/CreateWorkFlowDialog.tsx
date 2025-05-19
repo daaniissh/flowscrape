@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form"
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Layers2, Loader2 } from 'lucide-react'
 import React, { useCallback, useState } from 'react'
-import { z } from "zod"
 
 import { createWorkflowSchema, createWorkflowSchemaType } from '@/schema/workflows'
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -15,7 +14,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { useMutation } from '@tanstack/react-query'
 import { CreateWorkflow } from '@/actions/workflows/createWorkflow'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 const CreateWorkFlowDialog = ({ triggerText }: { triggerText?: string }) => {
+  const router = useRouter();
+
   const [open, setOpen] = useState<boolean>()
   const form = useForm<createWorkflowSchemaType>({
     resolver: zodResolver(createWorkflowSchema),
@@ -23,8 +25,9 @@ const CreateWorkFlowDialog = ({ triggerText }: { triggerText?: string }) => {
   })
   const { mutate, isPending } = useMutation({
     mutationFn: CreateWorkflow,
-    onSuccess: () => {
+    onSuccess: (workflowId: string) => {
       toast.success("Workflow created", { id: "create-workflow" })
+      router.push(`/workflow/editor/${workflowId}`);
     },
     onError: () => {
       toast.error("Failed to create workflow", { id: "create-workflow" })
@@ -85,7 +88,7 @@ const CreateWorkFlowDialog = ({ triggerText }: { triggerText?: string }) => {
                   </FormItem>
                 )}
               />
-              <Button disabled={isPending} type='submit' className='w-full' >{!isPending ? "Proceed" : <Loader2 className='animate-spin'/>}</Button>
+              <Button disabled={isPending} type='submit' className='w-full' >{!isPending ? "Proceed" : <Loader2 className='animate-spin' />}</Button>
             </form>
 
           </Form>
