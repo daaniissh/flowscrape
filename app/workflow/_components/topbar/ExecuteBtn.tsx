@@ -6,18 +6,22 @@ import { Button } from '@/components/ui/button'
 import { useMutation } from '@tanstack/react-query'
 import { useReactFlow } from '@xyflow/react'
 import { PlayIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { toast } from 'sonner'
 
 const ExecuteBtn = ({ workflowId }: { workflowId: string }) => {
-  const {toObject} = useReactFlow()
+  const router = useRouter()
+  const { toObject } = useReactFlow()
   const generate = useExecutionPlan()
   const mutation = useMutation({
     mutationFn: RunWorkflow,
-    onSuccess: () => {
+    onSuccess: ({ workflowId, executionId }) => {
       toast.success("Execution plan generated", { id: "flow-execution" })
+      router.push(`/workflow/runs/${workflowId}/${executionId}`);
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error)
       toast.error("something went wrong", { id: "flow-execution" })
 
     },

@@ -3,9 +3,13 @@
 import prisma from "@/lib/prisma";
 import { FlowToExecutionPlan } from "@/lib/workflow/ExecutionPlan";
 import { TaskRegistry } from "@/lib/workflow/task/registry";
-import { WorkflowExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, WorkflowExecutionTrigger } from "@/types/workFlow";
+import {
+  WorkflowExecutionPhaseStatus,
+  WorkflowExecutionPlan,
+  WorkflowExecutionStatus,
+  WorkflowExecutionTrigger,
+} from "@/types/workFlow";
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 
 export async function RunWorkflow(form: {
   workflowId: string;
@@ -70,5 +74,6 @@ export async function RunWorkflow(form: {
     },
   });
   if (!execution) throw new Error("Execution not created");
-  redirect(`/workflow/runs/${workflowId}/${execution.id}`)
+  const executionId = execution.id;
+  return { workflowId, executionId };
 }

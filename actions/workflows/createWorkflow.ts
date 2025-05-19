@@ -11,7 +11,7 @@ import { TaskType } from "@/types/task";
 import { WorkFlowStatus } from "@/types/workFlow";
 import { auth } from "@clerk/nextjs/server";
 import { Edge } from "@xyflow/react";
-import { redirect } from "next/navigation";
+
 
 export async function CreateWorkflow(form: createWorkflowSchemaType) {
   const { success, data } = createWorkflowSchema.safeParse(form);
@@ -40,5 +40,5 @@ export async function CreateWorkflow(form: createWorkflowSchemaType) {
     throw new Error("failed to create new workflow");
   }
 
-  redirect(`/workflow/editor/${result.id}`);
+  return result.id
 }
