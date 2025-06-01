@@ -17,7 +17,7 @@ export async function UpdateWorkflow({
   if (!userId) {
     throw new Error("unauthorized");
   }
-  const workflow = await prisma.workFlow.findUnique({  
+  const workflow = await prisma.workFlow.findUnique({
     where: {
       id,
       userId,
@@ -38,5 +38,5 @@ export async function UpdateWorkflow({
       userId,
     },
   });
-  revalidatePath("/workflows")
+  revalidatePath("/workflows");
 }

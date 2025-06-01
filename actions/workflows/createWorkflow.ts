@@ -12,7 +12,6 @@ import { WorkFlowStatus } from "@/types/workFlow";
 import { auth } from "@clerk/nextjs/server";
 import { Edge } from "@xyflow/react";
 
-
 export async function CreateWorkflow(form: createWorkflowSchemaType) {
   const { success, data } = createWorkflowSchema.safeParse(form);
   if (!success) {
@@ -40,5 +39,5 @@ export async function CreateWorkflow(form: createWorkflowSchemaType) {
     throw new Error("failed to create new workflow");
   }
 
-  return result.id
+  return result.id;
 }

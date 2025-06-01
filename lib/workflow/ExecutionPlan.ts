@@ -18,10 +18,10 @@ type FlowToExecutionPlanType = {
 };
 export function FlowToExecutionPlan(
   nodes: AppNode[],
-  edges: Edge[]
+  edges: Edge[],
 ): FlowToExecutionPlanType {
   const entryPoint = nodes.find(
-    (node) => TaskRegistry[node.data.type].isEntryPoint
+    (node) => TaskRegistry[node.data.type].isEntryPoint,
   );
   if (!entryPoint) {
     return {
@@ -74,13 +74,13 @@ export function FlowToExecutionPlan(
     }
     executionPlan.push(nextPhase);
   }
-  if(inputsWithErrors.length > 0){
+  if (inputsWithErrors.length > 0) {
     return {
-      error:{
-        type:FlowToExecutionPlanValidationError.INVALID_INPUTS,
-        invalidElement:inputsWithErrors
-      }
-    }
+      error: {
+        type: FlowToExecutionPlanValidationError.INVALID_INPUTS,
+        invalidElement: inputsWithErrors,
+      },
+    };
   }
   return { executionPlan };
 }
@@ -96,7 +96,7 @@ function getInvalidInputs(node: AppNode, edges: Edge[], planned: Set<string>) {
     }
     const incomingEdge = edges.filter((edge) => edge.target === node.id);
     const inputLinkedOutput = incomingEdge.find(
-      (edge) => edge.targetHandle === input.name
+      (edge) => edge.targetHandle === input.name,
     );
     const requiredInputProvidedByVisitedOutput =
       input.required &&
@@ -115,17 +115,16 @@ function getInvalidInputs(node: AppNode, edges: Edge[], planned: Set<string>) {
   return invalidInputs;
 }
 
-
-function getIncomers(node:AppNode,nodes:AppNode[],edges:Edge[]){
-  if(!node.id){
-    return []
+function getIncomers(node: AppNode, nodes: AppNode[], edges: Edge[]) {
+  if (!node.id) {
+    return [];
   }
-  const incomersIds = new Set()
-  edges.forEach(edge => {
-    if(edge.target === node.id){
-      incomersIds.add(edge.source)
+  const incomersIds = new Set();
+  edges.forEach((edge) => {
+    if (edge.target === node.id) {
+      incomersIds.add(edge.source);
     }
   });
 
-  return nodes.filter(node => incomersIds.has(node.id))
+  return nodes.filter((node) => incomersIds.has(node.id));
 }

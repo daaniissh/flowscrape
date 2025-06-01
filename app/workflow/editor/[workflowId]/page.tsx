@@ -1,7 +1,7 @@
-import prisma from '@/lib/prisma';
-import { auth } from '@clerk/nextjs/server';
-import Editor from '../../_components/Editor';
-import React from 'react';
+import prisma from "@/lib/prisma";
+import { auth } from "@clerk/nextjs/server";
+import Editor from "../../_components/Editor";
+import React from "react";
 
 const Page = async ({ params }: { params: { workflowId: string } }) => {
   // Await the params object first

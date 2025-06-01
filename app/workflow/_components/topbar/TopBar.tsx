@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import TooltipWrapper from "@/components/TooltipWrapper";
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon } from "lucide-react";
@@ -12,7 +12,12 @@ interface Props {
   workflowId: string;
   hideButton?: boolean;
 }
-export default function Topbar({ title, subtitle, workflowId, hideButton = false  }: Props) {
+export default function Topbar({
+  title,
+  subtitle,
+  workflowId,
+  hideButton = false,
+}: Props) {
   const router = useRouter();
   return (
     <header className="flex p-2 border-b-2 border-separate justify-between w-full h-[60px] sticky top-0 bg-background z-10">
@@ -25,18 +30,23 @@ export default function Topbar({ title, subtitle, workflowId, hideButton = false
         <div className="">
           <p className="font-bold text-ellipsis truncate">{title}</p>
           {subtitle && (
-            <p className="text-xs text-muted-foreground truncate text-ellipsis">{subtitle}</p>
+            <p className="text-xs text-muted-foreground truncate text-ellipsis">
+              {subtitle}
+            </p>
           )}
         </div>
       </div>
-      <div className="
-      flex gap-1 flex-1 justify-end">
-        {hideButton === false && <>
-          <ExecuteBtn workflowId={workflowId} />
-          <SaveBtn workflowId={workflowId} />  </>}
+      <div
+        className="
+      flex gap-1 flex-1 justify-end"
+      >
+        {hideButton === false && (
+          <>
+            <ExecuteBtn workflowId={workflowId} />
+            <SaveBtn workflowId={workflowId} />{" "}
+          </>
+        )}
       </div>
-
     </header>
   );
 }
-

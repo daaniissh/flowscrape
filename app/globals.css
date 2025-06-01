@@ -132,6 +132,5 @@
 }
 
 .cl-formButtonPrimary {
- 
-  @apply bg-primary hover:bg-primary/80 !shadow-none !text-sm
+  @apply bg-primary hover:bg-primary/80 !shadow-none !text-sm;
 }

@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
@@ -13,5 +13,5 @@ export async function DeleteWorkflow(id: string) {
     },
   });
 
-  revalidatePath("/workflows")
+  revalidatePath("/workflows");
 }

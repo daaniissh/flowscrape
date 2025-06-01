@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 interface Props {
   children: ReactNode;
@@ -18,4 +23,4 @@ export function TooltipWrapper(props: Props) {
   );
 }
 
-export default TooltipWrapper
+export default TooltipWrapper;

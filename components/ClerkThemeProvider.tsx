@@ -5,7 +5,11 @@ import { dark } from "@clerk/themes";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-export function ClerkProviderWrapper({ children }: { children: React.ReactNode }) {
+export function ClerkProviderWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -19,7 +23,6 @@ export function ClerkProviderWrapper({ children }: { children: React.ReactNode }
   const effectiveTheme = theme === "system" ? systemTheme : theme;
   return (
     <ClerkProvider
-    
       afterSignOutUrl="/sign-n"
       appearance={{
         baseTheme: effectiveTheme === "dark" ? dark : undefined,

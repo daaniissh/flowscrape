@@ -8,7 +8,7 @@ export const LaunchBrowserTask = {
   icon: (props: LucideProps) => (
     <GlobeIcon className="stroke-pink-400 size-8" {...props} />
   ),
-  credits:5,
+  credits: 5,
   isEntryPoint: true,
   inputs: [
     {
@@ -16,10 +16,10 @@ export const LaunchBrowserTask = {
       type: TaskParamType.STRING,
       helperText: "eg: https://www.google.com",
       required: true,
-      hideHandle: true
-    }
-  ],
+      hideHandle: true,
+    },
+  ] as const,
   outputs: [
-    { name: "Web page", type: TaskParamType.BROWSER_INSTANCE }
-  ] 
+    { name: "Web page", type: TaskParamType.BROWSER_INSTANCE },
+  ] as const,
 } satisfies WorkflowTask;

@@ -16,11 +16,10 @@ export type WorkflowTask = {
   credits: number;
 };
 
-export type WorkflowExecutionPlanPhase={
-  phase:number;
-  nodes:AppNode[]
-
-}
+export type WorkflowExecutionPlanPhase = {
+  phase: number;
+  nodes: AppNode[];
+};
 export type WorkflowExecutionPlan = WorkflowExecutionPlanPhase[];
 
 export enum WorkflowExecutionStatus {

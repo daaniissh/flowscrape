@@ -9,22 +9,22 @@ export const PageToHtml = {
     <CodeIcon className="stroke-rose-400 " {...props} />
   ),
   isEntryPoint: false,
-  credits:2,
+  credits: 2,
   inputs: [
     {
       name: "Web page",
-      type:TaskParamType.BROWSER_INSTANCE,
-      required: true,
-    }
-  ],
-  outputs:[
-    {
-      name:"Html",
-      type: TaskParamType.STRING,
-    }, 
-    {
-      name:"Web page",
       type: TaskParamType.BROWSER_INSTANCE,
-    }
-  ]
-}satisfies WorkflowTask;
+      required: true,
+    },
+  ] as const,
+  outputs: [
+    {
+      name: "Html",
+      type: TaskParamType.STRING,
+    },
+    {
+      name: "Web page",
+      type: TaskParamType.BROWSER_INSTANCE,
+    } as const,
+  ],
+} satisfies WorkflowTask;

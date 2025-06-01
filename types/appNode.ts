@@ -13,12 +13,11 @@ export interface AppNode extends Node {
 
 export interface ParamProps {
   param: TaskParam;
-  disabled?:boolean,
+  disabled?: boolean;
   value: string;
   updateNodeParamsValue: (newValue: string) => void;
 }
-export type AppNodeMissingInputs={
+export type AppNodeMissingInputs = {
   nodeId: string;
   inputs: string[];
-  
-}
+};
