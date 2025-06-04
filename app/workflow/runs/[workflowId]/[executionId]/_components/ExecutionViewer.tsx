@@ -43,6 +43,7 @@ import {
 import { logLevel } from "@/types/log";
 import { cn } from "@/lib/utils";
 import PhaseStatusBadge from "./PhaseStatusBadge";
+import ReactCountUpWrapper from "@/components/ReactCountUpWrapper";
 type ExecutionData = Awaited<ReturnType<typeof GetWorkflowExecutionPhases>>;
 const ExecutionViewer = ({ initialData }: { initialData: ExecutionData }) => {
   const [selectedPhase, SetSelectedPhase] = useState<string | null>(null);
@@ -88,7 +89,14 @@ const ExecutionViewer = ({ initialData }: { initialData: ExecutionData }) => {
           <ExecutionLabel
             icon={CircleDashedIcon}
             label="Status"
-            value={query.data?.status}
+            value={
+              <div className="font-semibold capitalize flex gap-2 items-center">
+                <PhaseStatusBadge
+                  status={query.data?.status as WorkflowExecutionPhaseStatus}
+                />
+                <span>{query.data?.status}</span>
+              </div>
+            }
           />
           <ExecutionLabel
             icon={CalendarIcon}
@@ -117,7 +125,7 @@ const ExecutionViewer = ({ initialData }: { initialData: ExecutionData }) => {
           <ExecutionLabel
             icon={CoinsIcon}
             label="Credit consumed"
-            value={creditsConsumed}
+            value={<ReactCountUpWrapper value={creditsConsumed} />}
           />
           <Separator />
           <div className="flex-center py-2 px-4">
@@ -174,7 +182,7 @@ const ExecutionViewer = ({ initialData }: { initialData: ExecutionData }) => {
                   <CoinsIcon size={17} className="stroke-muted-foreground" />
                   <span>Credits</span>
                 </div>
-                <span>TODO</span>
+                <span>{phaseDetails.data.creditsCost}</span>
               </Badge>
               <Badge variant={"outline"} className="space-x-4">
                 <div className="flex gap-1 items-center">
@@ -186,6 +194,16 @@ const ExecutionViewer = ({ initialData }: { initialData: ExecutionData }) => {
                     phaseDetails.data.completedAt,
                     phaseDetails.data.startedAt,
                   ) || "-"}
+                </span>
+              </Badge>
+              <Badge variant={"outline"} className="space-x-1">
+                <div className="flex gap-1 items-center">
+                  {statusRing(
+                    phaseDetails.data.status as WorkflowExecutionPhaseStatus,
+                  )}
+                </div>
+                <span className="font-semibold">
+                  {phaseDetails.data.status}
                 </span>
               </Badge>
             </div>
@@ -326,4 +344,30 @@ function LogViewer({ logs }: { logs: ExecutionLog[] | undefined }) {
       </CardContent>
     </Card>
   );
+}
+
+function statusRing(status: WorkflowExecutionPhaseStatus) {
+  let colorClass = "";
+
+  switch (status) {
+    case WorkflowExecutionPhaseStatus.CREATED:
+      colorClass = "bg-gray-400";
+      break;
+    case WorkflowExecutionPhaseStatus.PENDING:
+      colorClass = "bg-yellow-400";
+      break;
+    case WorkflowExecutionPhaseStatus.RUNNING:
+      colorClass = "bg-blue-500 animate-pulse";
+      break;
+    case WorkflowExecutionPhaseStatus.COMPLETED:
+      colorClass = "bg-green-500";
+      break;
+    case WorkflowExecutionPhaseStatus.FAILED:
+      colorClass = "bg-red-500";
+      break;
+    default:
+      colorClass = "bg-primary";
+  }
+
+  return <div className={`${colorClass} rounded-full w-2 h-2`}></div>;
 }
