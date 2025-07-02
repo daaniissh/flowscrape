@@ -5,12 +5,14 @@ import FlowEditor from "./FlowEditor";
 import TopBar from "./topbar/TopBar";
 import TaskMenu from "./TaskMenu";
 import { FlowValidationProvider } from "@/components/context/FlowValidationContext";
+import { WorkFlowStatus } from "@/types/workFlow";
 const Editor = ({ workflow }: { workflow: WorkFlow }) => {
   return (
     <FlowValidationProvider>
       <ReactFlowProvider>
         <div className="flex flex-col h-full w-full overflow-hidden">
           <TopBar
+          isPublished={workflow.status === WorkFlowStatus.PUBLISHED}
             workflowId={workflow.id}
             title="Workflow editor"
             subtitle={workflow.name}

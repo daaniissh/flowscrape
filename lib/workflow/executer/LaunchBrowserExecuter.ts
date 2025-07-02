@@ -1,5 +1,5 @@
+import puppeteer from "puppeteer"; // use full puppeteer
 import { ExecutionEnvironment } from "@/types/executor";
-import puppeteer from "puppeteer";
 import { LaunchBrowserTask } from "../task/LaunchBrowser";
 
 export async function LaunchBrowserExecutor(
@@ -9,8 +9,10 @@ export async function LaunchBrowserExecutor(
     const websiteUrl = environment.getInput("website url");
 
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
+      executablePath: puppeteer.executablePath(), // full puppeteer provides this
     });
+
     environment.setBrowser(browser);
     environment.log.info("Browser started successfully");
 
@@ -22,7 +24,6 @@ export async function LaunchBrowserExecutor(
     return true;
   } catch (error: any) {
     environment.log.error(error.message);
-
     return false;
   }
 }
