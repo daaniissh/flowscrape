@@ -246,3 +246,4 @@ function LastRunDetails({ workflow }: { workflow: WorkFlow }) {
   );
 }
 export default WorkflowCard;
+
