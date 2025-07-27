@@ -16,8 +16,9 @@ import { Browser, Page } from "puppeteer";
 import { Edge } from "@xyflow/react";
 import { LogCollector } from "@/types/log";
 import { createLogCollector } from "../log";
+import { log } from "console";
 
-export async function ExecuteWorkflow(executionId: string) {
+export async function ExecuteWorkflow(executionId: string, nextRunAt?: Date) {
   const execution = await prisma.workflowExecution.findUnique({
     where: {
       id: executionId,
@@ -28,7 +29,11 @@ export async function ExecuteWorkflow(executionId: string) {
     throw new Error("execution");
   }
   const environment: Environment = { phases: {} };
-  await initializeWorkflowExecution(executionId, execution.workflowId);
+  await initializeWorkflowExecution(
+    executionId,
+    execution.workflowId,
+    nextRunAt,
+  );
   await initializePhaseStatuses(execution);
   const edges = JSON.parse(execution.definition).edges as Edge[];
 
@@ -61,6 +66,7 @@ export async function ExecuteWorkflow(executionId: string) {
 async function initializeWorkflowExecution(
   executionId: string,
   workflowId: string,
+  nextRunAt?: Date,
 ) {
   await prisma.workflowExecution.update({
     where: {
@@ -80,6 +86,7 @@ async function initializeWorkflowExecution(
       lastRunAt: new Date(),
       lastRunStatus: WorkflowExecutionStatus.RUNNING,
       lastRunId: executionId,
+      ...(nextRunAt && { nextRunAt }),
     },
   });
 }
@@ -206,6 +213,7 @@ async function executePhase(
 ): Promise<boolean> {
   const runFn = ExecuteRegistry[node.data.type];
   if (!runFn) {
+    LogCollector.error(`not found executor for task type: ${node.data.type}`)
     return false;
   }
   // await waitFor(3000);

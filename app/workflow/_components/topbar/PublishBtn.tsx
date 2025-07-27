@@ -34,7 +34,6 @@ const PublishBtn = ({ workflowId }: { workflowId: string }) => {
       onClick={() => {
         const plan = generate();
         if (!plan) {
-
           return;
         }
         toast.loading("Publishing workflow...", { id: workflowId });

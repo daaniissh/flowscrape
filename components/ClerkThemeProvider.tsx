@@ -23,7 +23,7 @@ export function ClerkProviderWrapper({
   const effectiveTheme = theme === "system" ? systemTheme : theme;
   return (
     <ClerkProvider
-      afterSignOutUrl="/sign-n"
+      afterSignOutUrl="/"
       appearance={{
         baseTheme: effectiveTheme === "dark" ? dark : undefined,
       }}

@@ -50,12 +50,12 @@ export default function Topbar({
           <>
             <ExecuteBtn workflowId={workflowId} />
             {isPublished && <UnpublishBtn workflowId={workflowId} />}
-            {!isPublished && <>
-              <SaveBtn workflowId={workflowId} />
-              <PublishBtn workflowId={workflowId} />
-            </>}
-
-
+            {!isPublished && (
+              <>
+                <SaveBtn workflowId={workflowId} />
+                <PublishBtn workflowId={workflowId} />
+              </>
+            )}
           </>
         )}
       </div>

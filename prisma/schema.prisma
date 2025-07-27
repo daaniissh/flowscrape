@@ -6,16 +6,16 @@ generator client {
   output   = "../lib/generated/prisma"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
-
 // datasource db {
-//   provider = "sqlite"
-//   url      = "file:./dev.db"
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+//   directUrl = env("DIRECT_URL")
 // }
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
 
 model WorkFlow {
   id          String  @id @default(cuid())
@@ -86,5 +86,16 @@ model ExecutionLog {
 
 model UserBalance{
   userId String @id
-  credits Int @default(0)
+  credits Int @default(100)
+}
+
+model Credential {
+  id String @id @default(cuid())
+  userId String
+  name String
+  value String
+
+  createdAt DateTime @default(now())
+  @@unique([userId, name])
+  
 }

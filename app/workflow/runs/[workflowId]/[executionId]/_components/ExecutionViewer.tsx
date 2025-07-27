@@ -71,11 +71,13 @@ const ExecutionViewer = ({ initialData }: { initialData: ExecutionData }) => {
     )[0];
     SetSelectedPhase(phaseToSelect.id);
   }, [query.data?.phases, isRunning, SetSelectedPhase]);
+
   const phaseDetails = useQuery({
-    queryKey: ["phaseDetails", selectedPhase],
+    queryKey: ["phaseDetails", selectedPhase, query.data?.status],
     enabled: selectedPhase !== null,
     queryFn: () => GetWorkflowPhaseDetails(selectedPhase!),
   });
+
   const duration = DatesToDurationString(
     query.data?.completedAt,
     query.data?.startedAt,
@@ -105,8 +107,8 @@ const ExecutionViewer = ({ initialData }: { initialData: ExecutionData }) => {
               <span className="!lowercase">
                 {query?.data?.startedAt
                   ? formatDistanceToNow(new Date(query.data?.startedAt), {
-                      addSuffix: true,
-                    })
+                    addSuffix: true,
+                  })
                   : "-"}
               </span>
             }
@@ -299,7 +301,7 @@ function LogViewer({ logs }: { logs: ExecutionLog[] | undefined }) {
     return null;
   }
   return (
-    <Card className="w-full py-0 rounded-lg">
+    <Card className="w-full  py-0 rounded-lg">
       <CardHeader className="rounded-lg rounded-b-none border-b py-4 bg-gray-50 dark:bg-background">
         <CardTitle className="text-base">Logs</CardTitle>
         <CardDescription className="text-muted-foreground text-sm">
@@ -308,7 +310,7 @@ function LogViewer({ logs }: { logs: ExecutionLog[] | undefined }) {
       </CardHeader>
 
       <CardContent className="p-0">
-        <Table>
+        <Table className="table-fixed w-full">
           <TableHeader className="text-muted-foreground text-sm">
             <TableRow>
               <TableHead className="px-4 py-2 w-[190px]">Time</TableHead>
@@ -328,13 +330,13 @@ function LogViewer({ logs }: { logs: ExecutionLog[] | undefined }) {
                   className={cn(
                     "uppercase text-xs font-bold p-[3px] pl-4",
                     (log.logLevel as logLevel) === "error" &&
-                      "text-destructive",
+                    "text-destructive",
                     (log.logLevel as logLevel) === "info" && "text-primary",
                   )}
                 >
                   {log.logLevel}
                 </TableCell>
-                <TableCell className="text-sm flex-1 px-4 py-2 capitalize">
+                <TableCell className="align-top text-sm px-4 py-2 break-words whitespace-pre-wrap w-[50%]">
                   {log.message}
                 </TableCell>
               </TableRow>

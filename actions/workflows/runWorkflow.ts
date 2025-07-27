@@ -33,7 +33,7 @@ export async function RunWorkflow(form: {
   if (!workflow) throw new Error("Workflow not found");
 
   let executionPlan: WorkflowExecutionPlan;
-  let workflowDefinition = flowDefinition
+  let workflowDefinition = flowDefinition;
   if (workflow.status === WorkFlowStatus.PUBLISHED) {
     executionPlan = JSON.parse(workflow.executionPlan!);
     workflowDefinition = workflow.definition;

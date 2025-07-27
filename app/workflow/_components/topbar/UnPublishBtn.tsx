@@ -2,7 +2,6 @@
 
 import { UnPublishWorkflow } from "@/actions/workflows/unpublish";
 
-
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { DownloadIcon } from "lucide-react";
@@ -30,14 +29,13 @@ const UnpublishBtn = ({ workflowId }: { workflowId: string }) => {
       variant={"outline"}
       className="flex items-center gap-2"
       onClick={() => {
-
         toast.loading("UnPublishing workflow...", { id: workflowId });
 
         mutation.mutate(workflowId);
       }}
     >
       <DownloadIcon size={16} className="stroke-orange-400" />
-      Un Publish
+      Unpublish
     </Button>
   );
 };
