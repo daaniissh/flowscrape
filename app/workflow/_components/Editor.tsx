@@ -12,7 +12,7 @@ const Editor = ({ workflow }: { workflow: WorkFlow }) => {
       <ReactFlowProvider>
         <div className="flex flex-col h-full w-full overflow-hidden">
           <TopBar
-          isPublished={workflow.status === WorkFlowStatus.PUBLISHED}
+            isPublished={workflow.status === WorkFlowStatus.PUBLISHED}
             workflowId={workflow.id}
             title="Workflow editor"
             subtitle={workflow.name}

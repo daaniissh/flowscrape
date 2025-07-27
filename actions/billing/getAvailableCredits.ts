@@ -16,6 +16,7 @@ export async function GetAvailableCredits() {
       userId,
     },
   });
+  console.log(balance);
   if (!balance) return -1;
   return balance.credits;
 }

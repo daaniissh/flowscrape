@@ -25,12 +25,13 @@ export async function ExtractTextFromElementExecutor(
       return false;
     }
     const extractedText = $.text(element);
+    console.log("extractedText", extractedText);
     if (!extractedText) {
       console.error("extracted text is empty for selector:");
       environment.log.error("extracted text is empty for selector");
       return false;
     }
-    environment.setOutput("Extracted text", extractedText);
+    environment.setOutput("Extractor", extractedText);
     return true;
   } catch (error: any) {
     environment.log.error(error.message);

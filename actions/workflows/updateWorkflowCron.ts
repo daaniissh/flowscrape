@@ -20,13 +20,13 @@ export async function UpdateWorkflowCron({
       where: { id, userId },
       data: {
         cron,
-        nextRunAt:interval.next().toDate(),
+        nextRunAt: interval.next().toDate(),
       },
     });
   } catch (error) {
     console.log("Error parsing cron expression:", error);
     throw new Error(
-      error instanceof Error ? error.message : "Invalid cron expression"
+      error instanceof Error ? error.message : "Invalid cron expression",
     );
   }
 }

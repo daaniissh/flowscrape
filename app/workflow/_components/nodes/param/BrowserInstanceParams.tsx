@@ -4,8 +4,7 @@ import React from "react";
 
 const BrowserInstanceParams = ({
   param,
-  updateNodeParamsValue,
-  value,
+ 
 }: ParamProps) => {
   return <p className="text-xs">{param.name}</p>;
 };

@@ -6,6 +6,7 @@ import StringParam from "./param/StringParam";
 import { useReactFlow } from "@xyflow/react";
 import { AppNode } from "@/types/appNode";
 import BrowserInstanceParams from "./param/BrowserInstanceParams";
+import SelectParam from "./param/SelectParam";
 
 const NodeParamsField = ({
   param,
@@ -45,7 +46,13 @@ const NodeParamsField = ({
       return (
         <BrowserInstanceParams
           param={param}
-          value={""}
+        />
+      );
+    case TaskParamType.SELECT:
+      return (
+        <SelectParam
+          param={param}
+          value={value}
           updateNodeParamsValue={updateNodeParamsValue}
         />
       );
